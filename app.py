@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request
 import pandas as pd
 # Sử dụng thư viện vnstock2 để lấy dữ liệu chứng khoán
@@ -22,5 +23,6 @@ def analyze():
     # Chức năng 3: Phân tích mã (Gửi mã sang TradingView Widget để hiển thị đồ thị)
     return render_template('index.html', symbol=symbol, show_chart=True)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
