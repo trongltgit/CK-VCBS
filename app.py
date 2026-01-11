@@ -5,8 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    # Only import heavy stuff when the route is actually called
-    # Or keep this simple so the app boots fast
+    # The app will load this page instantly without waiting for pandas
     market_summary = {
         "tang": ["VCB", "FPT", "MWG"],
         "giam": ["VIC", "VHM", "GAS"],
@@ -16,7 +15,7 @@ def index():
 
 @app.route('/analyze', methods=['POST'])
 def analyze():
-    # Import here to delay loading until needed
+    # Only load these heavy libraries when someone actually clicks 'Analyze'
     import pandas as pd
     from vnstock3 import Vnstock
     
